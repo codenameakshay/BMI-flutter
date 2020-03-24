@@ -4,9 +4,6 @@ import 'package:flutter/services.dart';
 import './theme_provider.dart';
 import 'package:provider/provider.dart';
 
-var weightValue = TextEditingController();
-var ageValue = TextEditingController();
-
 void main() {
   runApp(
     ChangeNotifierProvider<DynamicTheme>(
@@ -163,7 +160,7 @@ class _MainScreenPState extends State<MainScreenP> {
   var width;
   var weight;
   var age;
-  var _value;
+  var _length;
 
   @override
   void initState() {
@@ -171,9 +168,7 @@ class _MainScreenPState extends State<MainScreenP> {
     genderValue = 0;
     weight = 45;
     age = 20;
-    _value = 50.0;
-    weightValue.text = weight.toString();
-    ageValue.text = age.toString();
+    _length = 185.0;
   }
 
   void changeGenderValue(int val) {
@@ -187,7 +182,6 @@ class _MainScreenPState extends State<MainScreenP> {
   void increaseWeight() {
     setState(() {
       weight++;
-      weightValue.text = weight.toString();
       print(weight);
     });
   }
@@ -195,7 +189,6 @@ class _MainScreenPState extends State<MainScreenP> {
   void decreaseWeight() {
     setState(() {
       weight--;
-      weightValue.text = weight.toString();
       print(weight);
     });
   }
@@ -203,7 +196,6 @@ class _MainScreenPState extends State<MainScreenP> {
   void increaseAge() {
     setState(() {
       age++;
-      ageValue.text = age.toString();
       print(age);
     });
   }
@@ -211,7 +203,6 @@ class _MainScreenPState extends State<MainScreenP> {
   void decreaseAge() {
     setState(() {
       age--;
-      ageValue.text = age.toString();
       print(age);
     });
   }
@@ -244,7 +235,7 @@ class _MainScreenPState extends State<MainScreenP> {
                         print('Male');
                       },
                     ),
-                    Text('Male'),
+                    Text('Male', style: TextStyle(fontFamily:'',)),
                   ],
                 ),
                 Row(
@@ -282,19 +273,12 @@ class _MainScreenPState extends State<MainScreenP> {
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 15, horizontal: 15),
-                      child: Text('Weight (in Kg)'),
+                      child: Text('Weight'),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 15, horizontal: 15),
-                      child: TextField(
-                        enabled: false,
-                        controller: weightValue,
-                        textAlign: TextAlign.center,
-                        decoration: InputDecoration(
-                          hintText: weightValue.text,
-                        ),
-                      ),
+                      child: Text('$weight Kg'),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -368,20 +352,12 @@ class _MainScreenPState extends State<MainScreenP> {
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 15, horizontal: 15),
-                      child: Text('Age (in Years)'),
+                      child: Text('Age'),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 15, horizontal: 15),
-                      child: TextField(
-                        enabled: false,
-                        controller: ageValue,
-                        textAlign: TextAlign.center,
-                        decoration: InputDecoration(
-                          hintText: ageValue.text,
-                        ),
-                      ),
-                    ),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 15, horizontal: 15),
+                        child: Text('$age years')),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
@@ -452,58 +428,77 @@ class _MainScreenPState extends State<MainScreenP> {
               vertical: height * 0.03,
               horizontal: width * 0.05,
             ),
-            child: SliderTheme(
-              data: SliderTheme.of(context).copyWith(
-                activeTrackColor: themeProvider.isDarkMode
-                    ? Colors.teal[700]
-                    : Colors.blue[700],
-                inactiveTrackColor: themeProvider.isDarkMode
-                    ? Colors.teal[100]
-                    : Colors.blue[100],
-                trackShape: RoundedRectSliderTrackShape(),
-                trackHeight: 4.0,
-                thumbShape: RoundSliderThumbShape(enabledThumbRadius: 12.0),
-                thumbColor: themeProvider.isDarkMode
-                    ? Colors.tealAccent
-                    : Colors.blueAccent,
-                overlayColor: themeProvider.isDarkMode
-                    ? Colors.teal.withAlpha(32)
-                    : Colors.blue.withAlpha(32),
-                overlayShape: RoundSliderOverlayShape(overlayRadius: 28.0),
-                tickMarkShape: RoundSliderTickMarkShape(),
-                activeTickMarkColor: themeProvider.isDarkMode
-                    ? Colors.teal[700]
-                    : Colors.blue[700],
-                inactiveTickMarkColor: themeProvider.isDarkMode
-                    ? Colors.teal[100]
-                    : Colors.blue[100],
-                valueIndicatorShape: PaddleSliderValueIndicatorShape(),
-                valueIndicatorColor: themeProvider.isDarkMode
-                    ? Colors.tealAccent
-                    : Colors.blueAccent,
-                valueIndicatorTextStyle: TextStyle(
-                  color: themeProvider.isDarkMode
-                      ? Colors.black38
-                      : Colors.white70,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                  child: Text('Height : $_length cm'),
                 ),
-              ),
-              child: Slider(
-                value: _value,
-                min: 0,
-                max: 250,
-                label: '$_value',
-                divisions: 500,
-                onChanged: (value) {
-                  setState(
-                    () {
-                      _value = value;
+                SliderTheme(
+                  data: SliderTheme.of(context).copyWith(
+                    activeTrackColor: themeProvider.isDarkMode
+                        ? Colors.teal[700]
+                        : Colors.blue[700],
+                    inactiveTrackColor: themeProvider.isDarkMode
+                        ? Colors.teal[100]
+                        : Colors.blue[100],
+                    trackShape: RoundedRectSliderTrackShape(),
+                    trackHeight: 4.0,
+                    thumbShape: RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                    thumbColor: themeProvider.isDarkMode
+                        ? Colors.tealAccent
+                        : Colors.blueAccent,
+                    overlayColor: themeProvider.isDarkMode
+                        ? Colors.teal.withAlpha(32)
+                        : Colors.blue.withAlpha(32),
+                    overlayShape: RoundSliderOverlayShape(overlayRadius: 28.0),
+                    tickMarkShape: RoundSliderTickMarkShape(),
+                    activeTickMarkColor: themeProvider.isDarkMode
+                        ? Colors.teal[700]
+                        : Colors.blue[700],
+                    inactiveTickMarkColor: themeProvider.isDarkMode
+                        ? Colors.teal[100]
+                        : Colors.blue[100],
+                    valueIndicatorShape: PaddleSliderValueIndicatorShape(),
+                    valueIndicatorColor: themeProvider.isDarkMode
+                        ? Colors.tealAccent
+                        : Colors.blueAccent,
+                    valueIndicatorTextStyle: TextStyle(
+                      color: themeProvider.isDarkMode
+                          ? Colors.black38
+                          : Colors.white70,
+                    ),
+                  ),
+                  child: Slider(
+                    value: _length,
+                    min: 60,
+                    max: 310,
+                    label: '$_length',
+                    divisions: 500,
+                    onChanged: (value) {
+                      setState(
+                        () {
+                          _length = value;
+                        },
+                      );
                     },
-                  );
-                },
-              ),
+                  ),
+                ),
+              ],
             ),
           ),
-        )
+        ),
+        Container(
+            width: width * 0.88,
+            height: height * 0.15,
+            child: Card(
+                elevation: 0,
+                child: CupertinoButton(
+                    color: Color.fromARGB(255, 73, 232, 108),
+                    onPressed: () {},
+                    child: Text('Calculate'))))
       ],
     );
   }
@@ -530,8 +525,7 @@ class _MainScreenLState extends State<MainScreenL> {
     genderValue = 0;
     weight = 45;
     age = 20;
-    weightValue.text = weight.toString();
-    ageValue.text = age.toString();
+    // ageValue.text = age.toString();
   }
 
   void changeGenderValue(int val) {
@@ -545,7 +539,6 @@ class _MainScreenLState extends State<MainScreenL> {
   void increaseWeight() {
     setState(() {
       weight++;
-      weightValue.text = weight.toString();
       print(weight);
     });
   }
@@ -553,7 +546,6 @@ class _MainScreenLState extends State<MainScreenL> {
   void decreaseWeight() {
     setState(() {
       weight--;
-      weightValue.text = weight.toString();
       print(weight);
     });
   }
@@ -561,7 +553,6 @@ class _MainScreenLState extends State<MainScreenL> {
   void increaseAge() {
     setState(() {
       age++;
-      ageValue.text = age.toString();
       print(age);
     });
   }
@@ -569,7 +560,6 @@ class _MainScreenLState extends State<MainScreenL> {
   void decreaseAge() {
     setState(() {
       age--;
-      ageValue.text = age.toString();
       print(age);
     });
   }
@@ -641,19 +631,12 @@ class _MainScreenLState extends State<MainScreenL> {
                           Padding(
                             padding: const EdgeInsets.symmetric(
                                 vertical: 15, horizontal: 15),
-                            child: Text('Weight (in Kg)'),
+                            child: Text('Weight'),
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(
                                 vertical: 15, horizontal: 15),
-                            child: TextField(
-                              enabled: false,
-                              controller: weightValue,
-                              textAlign: TextAlign.center,
-                              decoration: InputDecoration(
-                                hintText: weightValue.text,
-                              ),
-                            ),
+                            child: Text('$weight Kg'),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -731,19 +714,12 @@ class _MainScreenLState extends State<MainScreenL> {
                           Padding(
                             padding: const EdgeInsets.symmetric(
                                 vertical: 15, horizontal: 15),
-                            child: Text('Age (in Years)'),
+                            child: Text('Age'),
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(
                                 vertical: 15, horizontal: 15),
-                            child: TextField(
-                              enabled: false,
-                              controller: ageValue,
-                              textAlign: TextAlign.center,
-                              decoration: InputDecoration(
-                                hintText: ageValue.text,
-                              ),
-                            ),
+                            child: Text('$age years'),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
