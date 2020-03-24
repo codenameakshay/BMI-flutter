@@ -6,11 +6,11 @@ A Flutter based BMI calculator that supports auto rotation, dark mode and materi
 
 ## Potrait Orientation
 
-![Portrait mode demo](examples/demo2.gif)
+![Portrait mode demo](examples/Demo2.gif)
 
 ## Landscape Orientation
 
-![Landscape mode demo](examples/demo4.gif)
+![Landscape mode demo](examples/Demo4.gif)
 
 # Download
 
