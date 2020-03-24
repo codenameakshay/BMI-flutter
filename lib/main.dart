@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import './theme_provider.dart';
 import 'package:provider/provider.dart';
+
+var weightValue = TextEditingController();
+var ageValue = TextEditingController();
 
 void main() {
   runApp(
@@ -156,11 +160,17 @@ class _MainScreenPState extends State<MainScreenP> {
   var genderValue;
   var height;
   var width;
+  var weight;
+  var age;
 
   @override
   void initState() {
     super.initState();
     genderValue = 0;
+    weight = 45;
+    age = 20;
+    weightValue.text = weight.toString();
+    ageValue.text = age.toString();
   }
 
   void changeGenderValue(int val) {
@@ -171,71 +181,123 @@ class _MainScreenPState extends State<MainScreenP> {
     );
   }
 
+  void increaseWeight() {
+    setState(() {
+      weight++;
+      weightValue.text = weight.toString();
+      print(weight);
+    });
+  }
+
+  void decreaseWeight() {
+    setState(() {
+      weight--;
+      weightValue.text = weight.toString();
+      print(weight);
+    });
+  }
+
+  void increaseAge() {
+    setState(() {
+      age++;
+      ageValue.text = age.toString();
+      print(age);
+    });
+  }
+
+  void decreaseAge() {
+    setState(() {
+      age--;
+      ageValue.text = age.toString();
+      print(age);
+    });
+  }
+
   _MainScreenPState(this.height, this.width);
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Card(
-          elevation: 10,
-          margin: EdgeInsets.symmetric(
-            vertical: height * 0.03,
-            horizontal: width * 0.05,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Radio(
-                    value: 1,
-                    groupValue: genderValue,
-                    onChanged: (value) {
-                      changeGenderValue(value);
-                      print('Male');
-                    },
-                  ),
-                  Text('Male'),
-                ],
-              ),
-              Row(
-                children: <Widget>[
-                  Radio(
-                    value: 2,
-                    groupValue: genderValue,
-                    onChanged: (value) {
-                      changeGenderValue(value);
-                      print('Female');
-                    },
-                  ),
-                  Text('Female'),
-                ],
-              ),
-            ],
+        Container(width: width*0.98,height: height*0.17,
+          child: Card(
+            elevation: 10,
+            margin: EdgeInsets.symmetric(
+              vertical: height * 0.03,
+              horizontal: width * 0.05,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Radio(
+                      value: 1,
+                      groupValue: genderValue,
+                      onChanged: (value) {
+                        changeGenderValue(value);
+                        print('Male');
+                      },
+                    ),
+                    Text('Male'),
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    Radio(
+                      value: 2,
+                      groupValue: genderValue,
+                      onChanged: (value) {
+                        changeGenderValue(value);
+                        print('Female');
+                      },
+                    ),
+                    Text('Female'),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
-        Row(mainAxisAlignment: MainAxisAlignment.center,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
-              width: width*0.495,
-              height: height*0.25,
+              width: width * 0.495,
+              height: height * 0.35,
               child: Card(
                 margin: EdgeInsets.symmetric(
                   vertical: height * 0.02,
                   horizontal: width * 0.05,
                 ),
                 elevation: 10,
-                child: Column(mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[Padding(
+                    padding: const EdgeInsets.symmetric(
+                          vertical: 15, horizontal: 15),
+                    child: Text('Weight (in Kg)'),
+                  ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical:15,horizontal:15),
-                      child: Text('Weight'),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 15, horizontal: 15),
+                      child: TextField(
+                        enabled: false,
+                        controller: weightValue,
+                        textAlign: TextAlign.center,
+                        decoration: InputDecoration(
+                          hintText: weightValue.text,
+                        ),
+                      ),
                     ),
-                    Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         InkWell(
                           child: GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              HapticFeedback.vibrate();
+                              decreaseWeight();
+                            },
                             child: Padding(
                               padding: const EdgeInsets.all(15),
                               child: ClipOval(
@@ -251,7 +313,10 @@ class _MainScreenPState extends State<MainScreenP> {
                         ),
                         InkWell(
                           child: GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              HapticFeedback.vibrate();
+                              increaseWeight();
+                            },
                             child: Padding(
                               padding: const EdgeInsets.all(15),
                               child: ClipOval(
@@ -271,25 +336,43 @@ class _MainScreenPState extends State<MainScreenP> {
                 ),
               ),
             ),
-            Container(width: width*0.495,
-              height: height*0.25,
+            Container(
+              width: width * 0.495,
+              height: height * 0.35,
               child: Card(
                 margin: EdgeInsets.symmetric(
                   vertical: height * 0.02,
                   horizontal: width * 0.05,
                 ),
                 elevation: 10,
-                child: Column(mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[Padding(
+                    padding: const EdgeInsets.symmetric(
+                          vertical: 15, horizontal: 15),
+                    child: Text('Age (in Years)'),
+                  ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical:15,horizontal:15),
-                      child: Text('Age'),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 15, horizontal: 15),
+                      child: TextField(
+                        enabled: false,
+                        controller: ageValue,
+                        textAlign: TextAlign.center,
+                        decoration: InputDecoration(
+                          hintText: ageValue.text,
+                        ),
+                      ),
                     ),
-                    Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         InkWell(
                           child: GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              HapticFeedback.vibrate();
+                              decreaseAge();
+                            },
                             child: Padding(
                               padding: const EdgeInsets.all(15),
                               child: ClipOval(
@@ -305,7 +388,10 @@ class _MainScreenPState extends State<MainScreenP> {
                         ),
                         InkWell(
                           child: GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              HapticFeedback.vibrate();
+                              increaseAge();
+                            },
                             child: Padding(
                               padding: const EdgeInsets.all(15),
                               child: ClipOval(
