@@ -1227,7 +1227,7 @@ class _MainScreenLState extends State<MainScreenL> {
                     child: Text(
                       'Calculate',
                       style:
-                          TextStyle(fontFamily: 'IBM Plex Sans', fontSize: 40),
+                          TextStyle(fontFamily: 'IBM Plex Sans', fontSize: 35),
                     ),
                   ),
                 ),
@@ -1392,6 +1392,7 @@ class _ResultScreenPState extends State<ResultScreenP> {
                 style: TextStyle(fontFamily: 'IBM Plex Sans', fontSize: 40),
               ),
               onPressed: () {
+                HapticFeedback.vibrate();
                 Navigator.pop(context);
               }),
         )
@@ -1552,6 +1553,7 @@ class _ResultScreenLState extends State<ResultScreenL> {
                 style: TextStyle(fontFamily: 'IBM Plex Sans', fontSize: 40),
               ),
               onPressed: () {
+                HapticFeedback.vibrate();
                 Navigator.pop(context);
               }),
         )

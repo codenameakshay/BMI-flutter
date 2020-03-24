@@ -1,16 +1,17 @@
-# bmi_calc
+# BMI Calculator
 
-A new Flutter project.
+A Flutter based BMI calculator that supports auto rotation, dark mode and material design.
 
-## Getting Started
+# Screenshot
 
-This project is a starting point for a Flutter application.
+## Potrait Orientation
 
-A few resources to get you started if this is your first Flutter project:
+![Portrait mode demo](examples/demo2.gif)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Landscape Orientation
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![Landscape mode demo](examples/demo4.gif)
+
+# Download
+
+Download it from the build\app\outputs\apk\release\app-release.apk directory.
