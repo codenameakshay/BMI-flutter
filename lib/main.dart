@@ -235,7 +235,10 @@ class _MainScreenPState extends State<MainScreenP> {
                         print('Male');
                       },
                     ),
-                    Text('Male', style: TextStyle(fontFamily:'',)),
+                    Text('Male',
+                        style: TextStyle(
+                          fontFamily: 'Raleway',fontSize: 20,
+                        )),
                   ],
                 ),
                 Row(
@@ -248,7 +251,12 @@ class _MainScreenPState extends State<MainScreenP> {
                         print('Female');
                       },
                     ),
-                    Text('Female'),
+                    Text(
+                      'Female',
+                      style: TextStyle(
+                        fontFamily: 'Raleway',fontSize: 20,
+                      ),
+                    ),
                   ],
                 ),
               ],
@@ -271,14 +279,24 @@ class _MainScreenPState extends State<MainScreenP> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 15, horizontal: 15),
-                      child: Text('Weight'),
+                      padding: const EdgeInsets.only(
+                          top: 15, left: 15, right: 15),
+                      child: Text(
+                        'Weight',
+                        style: TextStyle(
+                          fontFamily: 'Raleway',fontSize: 20,
+                        ),
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 15, horizontal: 15),
-                      child: Text('$weight Kg'),
+                      child: Text(
+                        '$weight Kg',
+                        style: TextStyle(
+                          fontFamily: 'IBM Plex Sans',fontSize: 20,
+                        ),
+                      ),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -350,14 +368,25 @@ class _MainScreenPState extends State<MainScreenP> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 15, horizontal: 15),
-                      child: Text('Age'),
+                      padding: const EdgeInsets.only(
+                          top: 15, left: 15, right: 15),
+                      child: Text(
+                        'Age',
+                        style: TextStyle(
+                          fontFamily: 'Raleway',fontSize: 20,
+                        ),
+                      ),
                     ),
                     Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 15, horizontal: 15),
-                        child: Text('$age years')),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 15, horizontal: 15),
+                      child: Text(
+                        '$age years',
+                        style: TextStyle(
+                          fontFamily: 'IBM Plex Sans',fontSize: 20,
+                        ),
+                      ),
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
@@ -434,7 +463,21 @@ class _MainScreenPState extends State<MainScreenP> {
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-                  child: Text('Height : $_length cm'),
+                  child: Row( mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        'Height :',
+                        style: TextStyle(
+                          fontFamily: 'Raleway',fontSize: 20,
+                        ),
+                      ),Text(
+                        ' $_length cm',
+                        style: TextStyle(
+                          fontFamily: 'IBM Plex Sans',fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 SliderTheme(
                   data: SliderTheme.of(context).copyWith(
@@ -466,6 +509,7 @@ class _MainScreenPState extends State<MainScreenP> {
                         ? Colors.tealAccent
                         : Colors.blueAccent,
                     valueIndicatorTextStyle: TextStyle(
+                      fontFamily: 'Raleway',
                       color: themeProvider.isDarkMode
                           ? Colors.black38
                           : Colors.white70,
