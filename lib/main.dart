@@ -46,6 +46,7 @@ class _HomePageState extends State<HomePage> {
     final themeProvider = Provider.of<DynamicTheme>(context);
     return Scaffold(
       drawer: Drawer(
+        elevation: 10,
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
@@ -216,9 +217,12 @@ class _MainScreenPState extends State<MainScreenP> {
   _MainScreenPState(this.height, this.width);
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<DynamicTheme>(context);
     return Column(
       children: <Widget>[
-        Container(width: width*0.98,height: height*0.17,
+        Container(
+          width: width * 0.98,
+          height: height * 0.17,
           child: Card(
             elevation: 10,
             margin: EdgeInsets.symmetric(
@@ -272,11 +276,12 @@ class _MainScreenPState extends State<MainScreenP> {
                 elevation: 10,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[Padding(
-                    padding: const EdgeInsets.symmetric(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
                           vertical: 15, horizontal: 15),
-                    child: Text('Weight (in Kg)'),
-                  ),
+                      child: Text('Weight (in Kg)'),
+                    ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 15, horizontal: 15),
@@ -302,10 +307,14 @@ class _MainScreenPState extends State<MainScreenP> {
                               padding: const EdgeInsets.all(15),
                               child: ClipOval(
                                 child: Container(
-                                  color: Colors.blue,
+                                  color: themeProvider.isDarkMode
+                                      ? Colors.tealAccent[400]
+                                      : Colors.blue,
                                   height: width * 0.1, // height of the button
                                   width: width * 0.1, // width of the button
-                                  child: Center(child: Text('-')),
+                                  child: Center(
+                                      child: Icon(Icons.remove,
+                                          size: width * 0.08)),
                                 ),
                               ),
                             ),
@@ -321,10 +330,16 @@ class _MainScreenPState extends State<MainScreenP> {
                               padding: const EdgeInsets.all(15),
                               child: ClipOval(
                                 child: Container(
-                                  color: Colors.blue,
+                                  color: themeProvider.isDarkMode
+                                      ? Colors.tealAccent[400]
+                                      : Colors.blue,
                                   height: width * 0.1, // height of the button
                                   width: width * 0.1, // width of the button
-                                  child: Center(child: Text('+')),
+                                  child: Center(
+                                      child: Icon(
+                                    Icons.add,
+                                    size: width * 0.08,
+                                  )),
                                 ),
                               ),
                             ),
@@ -347,11 +362,12 @@ class _MainScreenPState extends State<MainScreenP> {
                 elevation: 10,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[Padding(
-                    padding: const EdgeInsets.symmetric(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
                           vertical: 15, horizontal: 15),
-                    child: Text('Age (in Years)'),
-                  ),
+                      child: Text('Age (in Years)'),
+                    ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 15, horizontal: 15),
@@ -377,10 +393,16 @@ class _MainScreenPState extends State<MainScreenP> {
                               padding: const EdgeInsets.all(15),
                               child: ClipOval(
                                 child: Container(
-                                  color: Colors.blue,
+                                  color: themeProvider.isDarkMode
+                                      ? Colors.tealAccent[400]
+                                      : Colors.blue,
                                   height: width * 0.1, // height of the button
                                   width: width * 0.1, // width of the button
-                                  child: Center(child: Text('-')),
+                                  child: Center(
+                                      child: Icon(
+                                    Icons.remove,
+                                    size: width * 0.08,
+                                  )),
                                 ),
                               ),
                             ),
@@ -396,10 +418,16 @@ class _MainScreenPState extends State<MainScreenP> {
                               padding: const EdgeInsets.all(15),
                               child: ClipOval(
                                 child: Container(
-                                  color: Colors.blue,
+                                  color: themeProvider.isDarkMode
+                                      ? Colors.tealAccent[400]
+                                      : Colors.blue,
                                   height: width * 0.1, // height of the button
                                   width: width * 0.1, // width of the button
-                                  child: Center(child: Text('+')),
+                                  child: Center(
+                                      child: Icon(
+                                    Icons.add,
+                                    size: width * 0.08,
+                                  )),
                                 ),
                               ),
                             ),
@@ -430,11 +458,17 @@ class _MainScreenLState extends State<MainScreenL> {
   var genderValue;
   var height;
   var width;
+  var weight;
+  var age;
 
   @override
   void initState() {
     super.initState();
     genderValue = 0;
+    weight = 45;
+    age = 20;
+    weightValue.text = weight.toString();
+    ageValue.text = age.toString();
   }
 
   void changeGenderValue(int val) {
@@ -445,43 +479,265 @@ class _MainScreenLState extends State<MainScreenL> {
     );
   }
 
+  void increaseWeight() {
+    setState(() {
+      weight++;
+      weightValue.text = weight.toString();
+      print(weight);
+    });
+  }
+
+  void decreaseWeight() {
+    setState(() {
+      weight--;
+      weightValue.text = weight.toString();
+      print(weight);
+    });
+  }
+
+  void increaseAge() {
+    setState(() {
+      age++;
+      ageValue.text = age.toString();
+      print(age);
+    });
+  }
+
+  void decreaseAge() {
+    setState(() {
+      age--;
+      ageValue.text = age.toString();
+      print(age);
+    });
+  }
+
   _MainScreenLState(this.height, this.width);
   @override
   Widget build(BuildContext context) {
-    return Column(
+    final themeProvider = Provider.of<DynamicTheme>(context);
+    return Row(
       children: <Widget>[
-        Card(
-          margin: EdgeInsets.symmetric(
-            vertical: height * 0.04,
-            horizontal: width * 0.05,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        Container(height: height*0.98,width: width*0.5,
+          child: Column(
             children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Radio(
-                    value: 1,
-                    groupValue: genderValue,
-                    onChanged: (value) {
-                      changeGenderValue(value);
-                      print('Male');
-                    },
-                  ),
-                  Text('Male'),
-                ],
+              Card(elevation: 10,
+                margin: EdgeInsets.symmetric(
+                  vertical: height * 0.04,
+                  horizontal: width * 0.02,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        Radio(
+                          value: 1,
+                          groupValue: genderValue,
+                          onChanged: (value) {
+                            changeGenderValue(value);
+                            print('Male');
+                          },
+                        ),
+                        Text('Male'),
+                      ],
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Radio(
+                          value: 2,
+                          groupValue: genderValue,
+                          onChanged: (value) {
+                            changeGenderValue(value);
+                            print('Female');
+                          },
+                        ),
+                        Text('Female'),
+                      ],
+                    ),
+                  ],
+                ),
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  Radio(
-                    value: 2,
-                    groupValue: genderValue,
-                    onChanged: (value) {
-                      changeGenderValue(value);
-                      print('Female');
-                    },
+                  Container(
+                    width: width * 0.25,
+                    height: height * 0.68,
+                    child: Card(
+                      margin: EdgeInsets.symmetric(
+                        vertical: height * 0.005,
+                        horizontal: width * 0.02,
+                      ),
+                      elevation: 10,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 15, horizontal: 15),
+                            child: Text('Weight (in Kg)'),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 15, horizontal: 15),
+                            child: TextField(
+                              enabled: false,
+                              controller: weightValue,
+                              textAlign: TextAlign.center,
+                              decoration: InputDecoration(
+                                hintText: weightValue.text,
+                              ),
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              InkWell(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    HapticFeedback.vibrate();
+                                    decreaseWeight();
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(15),
+                                    child: ClipOval(
+                                      child: Container(
+                                        color: themeProvider.isDarkMode
+                                            ? Colors.tealAccent[400]
+                                            : Colors.blue,
+                                        height:
+                                            height * 0.1, // height of the button
+                                        width: height * 0.1, // width of the button
+                                        child: Center(
+                                            child: Icon(Icons.remove,
+                                                size: height * 0.08)),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              InkWell(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    HapticFeedback.vibrate();
+                                    increaseWeight();
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(15),
+                                    child: ClipOval(
+                                      child: Container(
+                                        color: themeProvider.isDarkMode
+                                            ? Colors.tealAccent[400]
+                                            : Colors.blue,
+                                        height:
+                                            height * 0.1, // height of the button
+                                        width: height * 0.1, // width of the button
+                                        child: Center(
+                                            child: Icon(
+                                          Icons.add,
+                                          size: height * 0.08,
+                                        )),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
                   ),
-                  Text('Female'),
+                  Container(
+                    width: width * 0.25,
+                    height: height * 0.68,
+                    child: Card(
+                      margin: EdgeInsets.symmetric(
+                        vertical: height * 0.005,
+                        horizontal: width * 0.02,
+                      ),
+                      elevation: 10,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 15, horizontal: 15),
+                            child: Text('Age (in Years)'),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 15, horizontal: 15),
+                            child: TextField(
+                              enabled: false,
+                              controller: ageValue,
+                              textAlign: TextAlign.center,
+                              decoration: InputDecoration(
+                                hintText: ageValue.text,
+                              ),
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              InkWell(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    HapticFeedback.vibrate();
+                                    decreaseAge();
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(15),
+                                    child: ClipOval(
+                                      child: Container(
+                                        color: themeProvider.isDarkMode
+                                            ? Colors.tealAccent[400]
+                                            : Colors.blue,
+                                        height:
+                                            height * 0.1, // height of the button
+                                        width: height * 0.1, // width of the button
+                                        child: Center(
+                                            child: Icon(
+                                          Icons.remove,
+                                          size: height * 0.08,
+                                        )),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              InkWell(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    HapticFeedback.vibrate();
+                                    increaseAge();
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(15),
+                                    child: ClipOval(
+                                      child: Container(
+                                        color: themeProvider.isDarkMode
+                                            ? Colors.tealAccent[400]
+                                            : Colors.blue,
+                                        height:
+                                            height * 0.1, // height of the button
+                                        width: height * 0.1, // width of the button
+                                        child: Center(
+                                            child: Icon(
+                                          Icons.add,
+                                          size: height * 0.08,
+                                        )),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ],
