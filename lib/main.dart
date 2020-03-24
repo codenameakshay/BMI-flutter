@@ -38,6 +38,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  bool isCalculated;
+  @override
+  void initState() {
+    super.initState();
+    isCalculated = false;
+  }
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<DynamicTheme>(context);
@@ -119,18 +125,22 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text("BMI Calculator"),
       ),
-      body: MainScreen(),
+      body: isCalculated?ResultScreen(isCalculated):MainScreen(isCalculated),
       // isBinary ? BinaryClock() : DigitalClock(),
     );
   }
 }
 
 class MainScreen extends StatefulWidget {
+  var isCalculated;
+  MainScreen(this.isCalculated);
   @override
-  _MainScreenState createState() => _MainScreenState();
+  _MainScreenState createState() => _MainScreenState(this.isCalculated);
 }
 
 class _MainScreenState extends State<MainScreen> {
+  var isCalculated;
+  _MainScreenState(this.isCalculated);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -138,8 +148,33 @@ class _MainScreenState extends State<MainScreen> {
       child: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           return constraints.maxHeight > constraints.maxWidth
-              ? MainScreenP(constraints.maxHeight, constraints.maxWidth)
-              : MainScreenL(constraints.maxHeight, constraints.maxWidth);
+              ? MainScreenP(constraints.maxHeight, constraints.maxWidth, isCalculated)
+              : MainScreenL(constraints.maxHeight, constraints.maxWidth, isCalculated);
+        },
+      ),
+    );
+  }
+}
+
+class ResultScreen extends StatefulWidget {
+  var isCalculated;
+  ResultScreen(this.isCalculated);
+  @override
+  _ResultScreenState createState() => _ResultScreenState(this.isCalculated);
+}
+
+class _ResultScreenState extends State<ResultScreen> {
+  var isCalculated;
+  _ResultScreenState(this.isCalculated);
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      // alignment: Alignment.center,
+      child: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          return constraints.maxHeight > constraints.maxWidth
+              ? ResultScreenP(constraints.maxHeight, constraints.maxWidth, isCalculated)
+              : ResultScreenL(constraints.maxHeight, constraints.maxWidth, isCalculated);
         },
       ),
     );
@@ -149,9 +184,10 @@ class _MainScreenState extends State<MainScreen> {
 class MainScreenP extends StatefulWidget {
   var height;
   var width;
-  MainScreenP(this.height, this.width);
+  var isCalculated;
+  MainScreenP(this.height, this.width, this.isCalculated);
   @override
-  _MainScreenPState createState() => _MainScreenPState(this.height, this.width);
+  _MainScreenPState createState() => _MainScreenPState(this.height, this.width, this.isCalculated);
 }
 
 class _MainScreenPState extends State<MainScreenP> {
@@ -162,6 +198,7 @@ class _MainScreenPState extends State<MainScreenP> {
   var age;
   var _length;
   var bmi;
+  var isCalculated;
 
   @override
   void initState() {
@@ -221,7 +258,7 @@ class _MainScreenPState extends State<MainScreenP> {
     bmi = weight / (_length * _length);
   }
 
-  _MainScreenPState(this.height, this.width);
+  _MainScreenPState(this.height, this.width,isCalculated);
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<DynamicTheme>(context);
@@ -581,9 +618,10 @@ class _MainScreenPState extends State<MainScreenP> {
 class MainScreenL extends StatefulWidget {
   var height;
   var width;
-  MainScreenL(this.height, this.width);
+  var isCalculated;
+  MainScreenL(this.height, this.width, this.isCalculated);
   @override
-  _MainScreenLState createState() => _MainScreenLState(this.height, this.width);
+  _MainScreenLState createState() => _MainScreenLState(this.height, this.width, this.isCalculated);
 }
 
 class _MainScreenLState extends State<MainScreenL> {
@@ -593,6 +631,7 @@ class _MainScreenLState extends State<MainScreenL> {
   var weight;
   var age;
   var _length;
+  var isCalculated;
 
   @override
   void initState() {
@@ -647,7 +686,7 @@ class _MainScreenLState extends State<MainScreenL> {
     });
   }
 
-  _MainScreenLState(this.height, this.width);
+  _MainScreenLState(this.height, this.width, this.isCalculated);
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<DynamicTheme>(context);
@@ -1008,7 +1047,11 @@ class _MainScreenLState extends State<MainScreenL> {
                   elevation: 0,
                   child: CupertinoButton(
                     color: Color.fromARGB(255, 73, 232, 108),
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        isCalculated = true;
+                      });
+                    },
                     child: Text(
                       'Calculate',
                       style:
@@ -1022,5 +1065,45 @@ class _MainScreenLState extends State<MainScreenL> {
         ),
       ],
     );
+  }
+}
+
+class ResultScreenP extends StatefulWidget {
+  var height;
+  var width;
+  var isCalculated;
+  ResultScreenP(this.height, this.width, this.isCalculated);
+  @override
+  _ResultScreenPState createState() => _ResultScreenPState(this.height, this.width, this.isCalculated);
+}
+class _ResultScreenPState extends State<ResultScreenP>{
+  var height;
+  var width;
+  var isCalculated;
+  _ResultScreenPState(this.height, this.width, this.isCalculated);
+  @override
+  Widget build(BuildContext context) {
+    final themeProvider = Provider.of<DynamicTheme>(context);
+    return Row();
+  }
+}
+
+class ResultScreenL extends StatefulWidget {
+  var height;
+  var width;
+  var isCalculated;
+  ResultScreenL(this.height, this.width, this.isCalculated);
+  @override
+  _ResultScreenLState createState() => _ResultScreenLState(this.height, this.width, this.isCalculated);
+}
+class _ResultScreenLState extends State<ResultScreenL>{
+  var height;
+  var width;
+  var isCalculated;
+  _ResultScreenLState(this.height, this.width, this.isCalculated);
+  @override
+  Widget build(BuildContext context) {
+    final themeProvider = Provider.of<DynamicTheme>(context);
+    return Row();
   }
 }
