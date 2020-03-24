@@ -44,6 +44,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     isCalculated = false;
   }
+
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<DynamicTheme>(context);
@@ -125,7 +126,104 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text("BMI Calculator"),
       ),
-      body: isCalculated?ResultScreen(isCalculated):MainScreen(isCalculated),
+      body: MainScreen(isCalculated),
+      // isBinary ? BinaryClock() : DigitalClock(),
+    );
+  }
+}
+
+class HomePage2 extends StatefulWidget {
+  bool isCalculated;
+  HomePage2(this.isCalculated);
+  @override
+  _HomePage2State createState() => _HomePage2State(isCalculated);
+}
+
+class _HomePage2State extends State<HomePage2> {
+  bool isCalculated;
+  _HomePage2State(this.isCalculated);
+  @override
+  Widget build(BuildContext context) {
+    final themeProvider = Provider.of<DynamicTheme>(context);
+    return Scaffold(
+      drawer: Drawer(
+        elevation: 10,
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              child: Image.asset(
+                'assets/images/logo.jfif',
+              ),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Color.fromARGB(255, 60, 140, 231),
+                    Color.fromARGB(255, 0, 234, 255),
+                  ],
+                ),
+              ),
+            ),
+            Divider(
+              height: 2.0,
+            ),
+            ListTile(
+              title: Center(
+                child: Text('CodeNameAKshay'),
+              ),
+              onTap: () {
+                // Navigator.pop(context);
+              },
+            ),
+            Divider(
+              height: 2.0,
+            ),
+            Builder(
+              builder: (context) => ListTile(
+                title: Text('Toggle Dark mode'),
+                leading: Icon(Icons.brightness_4),
+                onTap: () {
+                  setState(() {
+                    themeProvider.changeDarkMode(!themeProvider.isDarkMode);
+                  });
+                  Navigator.pop(context);
+                },
+                trailing: CupertinoSwitch(
+                  value: themeProvider.getDarkMode(),
+                  onChanged: (value) {
+                    setState(() {
+                      themeProvider.changeDarkMode(value);
+                    });
+                    Navigator.pop(context);
+                  },
+                ),
+              ),
+            ),
+            Divider(
+              height: 2.0,
+            ),
+            Builder(
+              builder: (context) => ListTile(
+                title: Text('Nothing here'),
+                leading: Icon(Icons.access_time),
+                onTap: () {
+                  // changeIsBinary();
+                  Navigator.pop(context);
+                },
+              ),
+            ),
+            Divider(
+              height: 2.0,
+            ),
+          ],
+        ),
+      ),
+      appBar: AppBar(
+        title: Text("BMI Calculator"),
+      ),
+      body: ResultScreen(isCalculated),
       // isBinary ? BinaryClock() : DigitalClock(),
     );
   }
@@ -148,8 +246,10 @@ class _MainScreenState extends State<MainScreen> {
       child: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           return constraints.maxHeight > constraints.maxWidth
-              ? MainScreenP(constraints.maxHeight, constraints.maxWidth, isCalculated)
-              : MainScreenL(constraints.maxHeight, constraints.maxWidth, isCalculated);
+              ? MainScreenP(
+                  constraints.maxHeight, constraints.maxWidth, isCalculated)
+              : MainScreenL(
+                  constraints.maxHeight, constraints.maxWidth, isCalculated);
         },
       ),
     );
@@ -173,8 +273,10 @@ class _ResultScreenState extends State<ResultScreen> {
       child: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           return constraints.maxHeight > constraints.maxWidth
-              ? ResultScreenP(constraints.maxHeight, constraints.maxWidth, isCalculated)
-              : ResultScreenL(constraints.maxHeight, constraints.maxWidth, isCalculated);
+              ? ResultScreenP(
+                  constraints.maxHeight, constraints.maxWidth, isCalculated)
+              : ResultScreenL(
+                  constraints.maxHeight, constraints.maxWidth, isCalculated);
         },
       ),
     );
@@ -187,7 +289,8 @@ class MainScreenP extends StatefulWidget {
   var isCalculated;
   MainScreenP(this.height, this.width, this.isCalculated);
   @override
-  _MainScreenPState createState() => _MainScreenPState(this.height, this.width, this.isCalculated);
+  _MainScreenPState createState() =>
+      _MainScreenPState(this.height, this.width, this.isCalculated);
 }
 
 class _MainScreenPState extends State<MainScreenP> {
@@ -255,10 +358,10 @@ class _MainScreenPState extends State<MainScreenP> {
   }
 
   void calculateBMI() {
-    bmi = weight / (_length * _length);
+    bmi = weight / (_length * _length / 10000);
   }
 
-  _MainScreenPState(this.height, this.width,isCalculated);
+  _MainScreenPState(this.height, this.width, isCalculated);
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<DynamicTheme>(context);
@@ -602,7 +705,17 @@ class _MainScreenPState extends State<MainScreenP> {
             elevation: 0,
             child: CupertinoButton(
               color: Color.fromARGB(255, 73, 232, 108),
-              onPressed: () {},
+              onPressed: () {
+                setState(
+                  () {
+                    isCalculated = true;
+                  },
+                );
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                      builder: (context) => HomePage2(isCalculated)),
+                );
+              },
               child: Text(
                 'Calculate',
                 style: TextStyle(fontFamily: 'IBM Plex Sans', fontSize: 40),
@@ -621,7 +734,8 @@ class MainScreenL extends StatefulWidget {
   var isCalculated;
   MainScreenL(this.height, this.width, this.isCalculated);
   @override
-  _MainScreenLState createState() => _MainScreenLState(this.height, this.width, this.isCalculated);
+  _MainScreenLState createState() =>
+      _MainScreenLState(this.height, this.width, this.isCalculated);
 }
 
 class _MainScreenLState extends State<MainScreenL> {
@@ -1048,9 +1162,15 @@ class _MainScreenLState extends State<MainScreenL> {
                   child: CupertinoButton(
                     color: Color.fromARGB(255, 73, 232, 108),
                     onPressed: () {
-                      setState(() {
-                        isCalculated = true;
-                      });
+                      setState(
+                        () {
+                          isCalculated = true;
+                        },
+                      );
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) => HomePage2(isCalculated)),
+                      );
                     },
                     child: Text(
                       'Calculate',
@@ -1074,17 +1194,32 @@ class ResultScreenP extends StatefulWidget {
   var isCalculated;
   ResultScreenP(this.height, this.width, this.isCalculated);
   @override
-  _ResultScreenPState createState() => _ResultScreenPState(this.height, this.width, this.isCalculated);
+  _ResultScreenPState createState() =>
+      _ResultScreenPState(this.height, this.width, this.isCalculated);
 }
-class _ResultScreenPState extends State<ResultScreenP>{
+
+class _ResultScreenPState extends State<ResultScreenP> {
   var height;
   var width;
   var isCalculated;
   _ResultScreenPState(this.height, this.width, this.isCalculated);
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<DynamicTheme>(context);
-    return Row();
+// final themeProvider = Provider.of<DynamicTheme>(context);
+    return Container(
+      width: width * 0.9,
+      height: height * 0.5,
+      child: Column(
+        children: <Widget>[
+          Card(),
+          CupertinoButton(
+              child: Text('Back'),
+              onPressed: () {
+                Navigator.pop(context);
+              })
+        ],
+      ),
+    );
   }
 }
 
@@ -1094,16 +1229,18 @@ class ResultScreenL extends StatefulWidget {
   var isCalculated;
   ResultScreenL(this.height, this.width, this.isCalculated);
   @override
-  _ResultScreenLState createState() => _ResultScreenLState(this.height, this.width, this.isCalculated);
+  _ResultScreenLState createState() =>
+      _ResultScreenLState(this.height, this.width, this.isCalculated);
 }
-class _ResultScreenLState extends State<ResultScreenL>{
+
+class _ResultScreenLState extends State<ResultScreenL> {
   var height;
   var width;
   var isCalculated;
   _ResultScreenLState(this.height, this.width, this.isCalculated);
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<DynamicTheme>(context);
+    // final themeProvider = Provider.of<DynamicTheme>(context);
     return Row();
   }
 }
