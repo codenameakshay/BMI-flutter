@@ -136,8 +136,8 @@ class _MainScreenState extends State<MainScreen> {
       child: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           return constraints.maxHeight > constraints.maxWidth
-              ? MainScreenP()
-              : MainScreenL();
+              ? MainScreenP(constraints.maxHeight, constraints.maxWidth)
+              : MainScreenL(constraints.maxHeight, constraints.maxWidth);
         },
       ),
     );
@@ -145,39 +145,149 @@ class _MainScreenState extends State<MainScreen> {
 }
 
 class MainScreenP extends StatefulWidget {
+  var height;
+  var width;
+  MainScreenP(this.height, this.width);
   @override
-  _MainScreenPState createState() => _MainScreenPState();
+  _MainScreenPState createState() => _MainScreenPState(this.height, this.width);
 }
 
 class _MainScreenPState extends State<MainScreenP> {
+  var genderValue;
+  var height;
+  var width;
+
+  @override
+  void initState() {
+    super.initState();
+    genderValue = 0;
+  }
+
+  void changeGenderValue(int val) {
+    setState(
+      () {
+        genderValue = val;
+      },
+    );
+  }
+
+  _MainScreenPState(this.height, this.width);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // alignment: Alignment.center,
-      child: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-          return Radio();
-        },
-      ),
+    return Column(
+      children: <Widget>[
+        Card(
+          margin: EdgeInsets.symmetric(
+            vertical: height * 0.03,
+            horizontal: width * 0.05,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Radio(
+                    value: 1,
+                    groupValue: genderValue,
+                    onChanged: (value) {
+                      changeGenderValue(value);
+                      print('Male');
+                    },
+                  ),
+                  Text('Male'),
+                ],
+              ),
+              Row(
+                children: <Widget>[
+                  Radio(
+                    value: 2,
+                    groupValue: genderValue,
+                    onChanged: (value) {
+                      changeGenderValue(value);
+                      print('Female');
+                    },
+                  ),
+                  Text('Female'),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
 
 class MainScreenL extends StatefulWidget {
+  var height;
+  var width;
+  MainScreenL(this.height, this.width);
   @override
-  _MainScreenLState createState() => _MainScreenLState();
+  _MainScreenLState createState() => _MainScreenLState(this.height, this.width);
 }
 
 class _MainScreenLState extends State<MainScreenL> {
+  var genderValue;
+  var height;
+  var width;
+
+  @override
+  void initState() {
+    super.initState();
+    genderValue = 0;
+  }
+
+  void changeGenderValue(int val) {
+    setState(
+      () {
+        genderValue = val;
+      },
+    );
+  }
+
+  _MainScreenLState(this.height, this.width);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // alignment: Alignment.center,
-      child: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-          return Text('Width greater Than Height');
-        },
-      ),
+    return Column(
+      children: <Widget>[
+        Card(
+          margin: EdgeInsets.symmetric(
+            vertical: height * 0.04,
+            horizontal: width * 0.05,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Radio(
+                    value: 1,
+                    groupValue: genderValue,
+                    onChanged: (value) {
+                      changeGenderValue(value);
+                      print('Male');
+                    },
+                  ),
+                  Text('Male'),
+                ],
+              ),
+              Row(
+                children: <Widget>[
+                  Radio(
+                    value: 2,
+                    groupValue: genderValue,
+                    onChanged: (value) {
+                      changeGenderValue(value);
+                      print('Female');
+                    },
+                  ),
+                  Text('Female'),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
