@@ -163,6 +163,7 @@ class _MainScreenPState extends State<MainScreenP> {
   var width;
   var weight;
   var age;
+  var _value;
 
   @override
   void initState() {
@@ -170,6 +171,7 @@ class _MainScreenPState extends State<MainScreenP> {
     genderValue = 0;
     weight = 45;
     age = 20;
+    _value = 50.0;
     weightValue.text = weight.toString();
     ageValue.text = age.toString();
   }
@@ -441,6 +443,67 @@ class _MainScreenPState extends State<MainScreenP> {
             ),
           ],
         ),
+        Container(
+          width: width * 0.98,
+          height: height * 0.3,
+          child: Card(
+            elevation: 10,
+            margin: EdgeInsets.symmetric(
+              vertical: height * 0.03,
+              horizontal: width * 0.05,
+            ),
+            child: SliderTheme(
+              data: SliderTheme.of(context).copyWith(
+                activeTrackColor: themeProvider.isDarkMode
+                    ? Colors.teal[700]
+                    : Colors.blue[700],
+                inactiveTrackColor: themeProvider.isDarkMode
+                    ? Colors.teal[100]
+                    : Colors.blue[100],
+                trackShape: RoundedRectSliderTrackShape(),
+                trackHeight: 4.0,
+                thumbShape: RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                thumbColor: themeProvider.isDarkMode
+                    ? Colors.tealAccent
+                    : Colors.blueAccent,
+                overlayColor: themeProvider.isDarkMode
+                    ? Colors.teal.withAlpha(32)
+                    : Colors.blue.withAlpha(32),
+                overlayShape: RoundSliderOverlayShape(overlayRadius: 28.0),
+                tickMarkShape: RoundSliderTickMarkShape(),
+                activeTickMarkColor: themeProvider.isDarkMode
+                    ? Colors.teal[700]
+                    : Colors.blue[700],
+                inactiveTickMarkColor: themeProvider.isDarkMode
+                    ? Colors.teal[100]
+                    : Colors.blue[100],
+                valueIndicatorShape: PaddleSliderValueIndicatorShape(),
+                valueIndicatorColor: themeProvider.isDarkMode
+                    ? Colors.tealAccent
+                    : Colors.blueAccent,
+                valueIndicatorTextStyle: TextStyle(
+                  color: themeProvider.isDarkMode
+                      ? Colors.black38
+                      : Colors.white70,
+                ),
+              ),
+              child: Slider(
+                value: _value,
+                min: 0,
+                max: 250,
+                label: '$_value',
+                divisions: 500,
+                onChanged: (value) {
+                  setState(
+                    () {
+                      _value = value;
+                    },
+                  );
+                },
+              ),
+            ),
+          ),
+        )
       ],
     );
   }
@@ -517,10 +580,13 @@ class _MainScreenLState extends State<MainScreenL> {
     final themeProvider = Provider.of<DynamicTheme>(context);
     return Row(
       children: <Widget>[
-        Container(height: height*0.98,width: width*0.5,
+        Container(
+          height: height * 0.98,
+          width: width * 0.5,
           child: Column(
             children: <Widget>[
-              Card(elevation: 10,
+              Card(
+                elevation: 10,
                 margin: EdgeInsets.symmetric(
                   vertical: height * 0.04,
                   horizontal: width * 0.02,
@@ -605,9 +671,10 @@ class _MainScreenLState extends State<MainScreenL> {
                                         color: themeProvider.isDarkMode
                                             ? Colors.tealAccent[400]
                                             : Colors.blue,
-                                        height:
-                                            height * 0.1, // height of the button
-                                        width: height * 0.1, // width of the button
+                                        height: height *
+                                            0.1, // height of the button
+                                        width:
+                                            height * 0.1, // width of the button
                                         child: Center(
                                             child: Icon(Icons.remove,
                                                 size: height * 0.08)),
@@ -629,9 +696,10 @@ class _MainScreenLState extends State<MainScreenL> {
                                         color: themeProvider.isDarkMode
                                             ? Colors.tealAccent[400]
                                             : Colors.blue,
-                                        height:
-                                            height * 0.1, // height of the button
-                                        width: height * 0.1, // width of the button
+                                        height: height *
+                                            0.1, // height of the button
+                                        width:
+                                            height * 0.1, // width of the button
                                         child: Center(
                                             child: Icon(
                                           Icons.add,
@@ -693,9 +761,10 @@ class _MainScreenLState extends State<MainScreenL> {
                                         color: themeProvider.isDarkMode
                                             ? Colors.tealAccent[400]
                                             : Colors.blue,
-                                        height:
-                                            height * 0.1, // height of the button
-                                        width: height * 0.1, // width of the button
+                                        height: height *
+                                            0.1, // height of the button
+                                        width:
+                                            height * 0.1, // width of the button
                                         child: Center(
                                             child: Icon(
                                           Icons.remove,
@@ -719,9 +788,10 @@ class _MainScreenLState extends State<MainScreenL> {
                                         color: themeProvider.isDarkMode
                                             ? Colors.tealAccent[400]
                                             : Colors.blue,
-                                        height:
-                                            height * 0.1, // height of the button
-                                        width: height * 0.1, // width of the button
+                                        height: height *
+                                            0.1, // height of the button
+                                        width:
+                                            height * 0.1, // width of the button
                                         child: Center(
                                             child: Icon(
                                           Icons.add,
