@@ -237,7 +237,8 @@ class _MainScreenPState extends State<MainScreenP> {
                     ),
                     Text('Male',
                         style: TextStyle(
-                          fontFamily: 'Raleway',fontSize: 20,
+                          fontFamily: 'Raleway',
+                          fontSize: 20,
                         )),
                   ],
                 ),
@@ -254,7 +255,8 @@ class _MainScreenPState extends State<MainScreenP> {
                     Text(
                       'Female',
                       style: TextStyle(
-                        fontFamily: 'Raleway',fontSize: 20,
+                        fontFamily: 'Raleway',
+                        fontSize: 20,
                       ),
                     ),
                   ],
@@ -279,12 +281,13 @@ class _MainScreenPState extends State<MainScreenP> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.only(
-                          top: 15, left: 15, right: 15),
+                      padding:
+                          const EdgeInsets.only(top: 15, left: 15, right: 15),
                       child: Text(
                         'Weight',
                         style: TextStyle(
-                          fontFamily: 'Raleway',fontSize: 20,
+                          fontFamily: 'Raleway',
+                          fontSize: 20,
                         ),
                       ),
                     ),
@@ -294,7 +297,8 @@ class _MainScreenPState extends State<MainScreenP> {
                       child: Text(
                         '$weight Kg',
                         style: TextStyle(
-                          fontFamily: 'IBM Plex Sans',fontSize: 20,
+                          fontFamily: 'IBM Plex Sans',
+                          fontSize: 20,
                         ),
                       ),
                     ),
@@ -368,12 +372,13 @@ class _MainScreenPState extends State<MainScreenP> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.only(
-                          top: 15, left: 15, right: 15),
+                      padding:
+                          const EdgeInsets.only(top: 15, left: 15, right: 15),
                       child: Text(
                         'Age',
                         style: TextStyle(
-                          fontFamily: 'Raleway',fontSize: 20,
+                          fontFamily: 'Raleway',
+                          fontSize: 20,
                         ),
                       ),
                     ),
@@ -383,7 +388,8 @@ class _MainScreenPState extends State<MainScreenP> {
                       child: Text(
                         '$age years',
                         style: TextStyle(
-                          fontFamily: 'IBM Plex Sans',fontSize: 20,
+                          fontFamily: 'IBM Plex Sans',
+                          fontSize: 20,
                         ),
                       ),
                     ),
@@ -463,17 +469,21 @@ class _MainScreenPState extends State<MainScreenP> {
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-                  child: Row( mainAxisAlignment: MainAxisAlignment.center,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
                         'Height :',
                         style: TextStyle(
-                          fontFamily: 'Raleway',fontSize: 20,
+                          fontFamily: 'Raleway',
+                          fontSize: 20,
                         ),
-                      ),Text(
+                      ),
+                      Text(
                         ' $_length cm',
                         style: TextStyle(
-                          fontFamily: 'IBM Plex Sans',fontSize: 20,
+                          fontFamily: 'IBM Plex Sans',
+                          fontSize: 20,
                         ),
                       ),
                     ],
@@ -535,14 +545,20 @@ class _MainScreenPState extends State<MainScreenP> {
           ),
         ),
         Container(
-            width: width * 0.88,
-            height: height * 0.15,
-            child: Card(
-                elevation: 0,
-                child: CupertinoButton(
-                    color: Color.fromARGB(255, 73, 232, 108),
-                    onPressed: () {},
-                    child: Text('Calculate'))))
+          width: width * 0.88,
+          height: height * 0.15,
+          child: Card(
+            elevation: 0,
+            child: CupertinoButton(
+              color: Color.fromARGB(255, 73, 232, 108),
+              onPressed: () {},
+              child: Text(
+                'Calculate',
+                style: TextStyle(fontFamily: 'IBM Plex Sans', fontSize: 40),
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }
@@ -562,6 +578,7 @@ class _MainScreenLState extends State<MainScreenL> {
   var width;
   var weight;
   var age;
+  var _length;
 
   @override
   void initState() {
@@ -569,7 +586,7 @@ class _MainScreenLState extends State<MainScreenL> {
     genderValue = 0;
     weight = 45;
     age = 20;
-    // ageValue.text = age.toString();
+    _length = 185.0;
   }
 
   void changeGenderValue(int val) {
@@ -638,7 +655,13 @@ class _MainScreenLState extends State<MainScreenL> {
                             print('Male');
                           },
                         ),
-                        Text('Male'),
+                        Text(
+                          'Male',
+                          style: TextStyle(
+                            fontFamily: 'Raleway',
+                            fontSize: 20,
+                          ),
+                        ),
                       ],
                     ),
                     Row(
@@ -651,7 +674,13 @@ class _MainScreenLState extends State<MainScreenL> {
                             print('Female');
                           },
                         ),
-                        Text('Female'),
+                        Text(
+                          'Female',
+                          style: TextStyle(
+                            fontFamily: 'Raleway',
+                            fontSize: 20,
+                          ),
+                        ),
                       ],
                     ),
                   ],
@@ -673,14 +702,26 @@ class _MainScreenLState extends State<MainScreenL> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 15, horizontal: 15),
-                            child: Text('Weight'),
+                            padding: const EdgeInsets.only(
+                                top: 15, left: 15, right: 15),
+                            child: Text(
+                              'Weight',
+                              style: TextStyle(
+                                fontFamily: 'Raleway',
+                                fontSize: 20,
+                              ),
+                            ),
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(
                                 vertical: 15, horizontal: 15),
-                            child: Text('$weight Kg'),
+                            child: Text(
+                              '$weight Kg',
+                              style: TextStyle(
+                                fontFamily: 'IBM Plex Sans',
+                                fontSize: 20,
+                              ),
+                            ),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -756,14 +797,26 @@ class _MainScreenLState extends State<MainScreenL> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 15, horizontal: 15),
-                            child: Text('Age'),
+                            padding: const EdgeInsets.only(
+                                top: 15, left: 15, right: 15),
+                            child: Text(
+                              'Age',
+                              style: TextStyle(
+                                fontFamily: 'Raleway',
+                                fontSize: 20,
+                              ),
+                            ),
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(
                                 vertical: 15, horizontal: 15),
-                            child: Text('$age years'),
+                            child: Text(
+                              '$age years',
+                              style: TextStyle(
+                                fontFamily: 'IBM Plex Sans',
+                                fontSize: 20,
+                              ),
+                            ),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -829,6 +882,118 @@ class _MainScreenLState extends State<MainScreenL> {
                     ),
                   ),
                 ],
+              ),
+            ],
+          ),
+        ),
+        Container(
+          height: height * 0.94,
+          width: width * 0.5,
+          child: Column(
+            children: <Widget>[
+              Card(
+                elevation: 10,
+                margin: EdgeInsets.symmetric(
+                  vertical: height * 0.03,
+                  horizontal: width * 0.05,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 15, horizontal: 15),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            'Height :',
+                            style: TextStyle(
+                              fontFamily: 'Raleway',
+                              fontSize: 20,
+                            ),
+                          ),
+                          Text(
+                            ' $_length cm',
+                            style: TextStyle(
+                              fontFamily: 'IBM Plex Sans',
+                              fontSize: 20,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SliderTheme(
+                      data: SliderTheme.of(context).copyWith(
+                        activeTrackColor: themeProvider.isDarkMode
+                            ? Colors.teal[700]
+                            : Colors.blue[700],
+                        inactiveTrackColor: themeProvider.isDarkMode
+                            ? Colors.teal[100]
+                            : Colors.blue[100],
+                        trackShape: RoundedRectSliderTrackShape(),
+                        trackHeight: 4.0,
+                        thumbShape:
+                            RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                        thumbColor: themeProvider.isDarkMode
+                            ? Colors.tealAccent
+                            : Colors.blueAccent,
+                        overlayColor: themeProvider.isDarkMode
+                            ? Colors.teal.withAlpha(32)
+                            : Colors.blue.withAlpha(32),
+                        overlayShape:
+                            RoundSliderOverlayShape(overlayRadius: 28.0),
+                        tickMarkShape: RoundSliderTickMarkShape(),
+                        activeTickMarkColor: themeProvider.isDarkMode
+                            ? Colors.teal[700]
+                            : Colors.blue[700],
+                        inactiveTickMarkColor: themeProvider.isDarkMode
+                            ? Colors.teal[100]
+                            : Colors.blue[100],
+                        valueIndicatorShape: PaddleSliderValueIndicatorShape(),
+                        valueIndicatorColor: themeProvider.isDarkMode
+                            ? Colors.tealAccent
+                            : Colors.blueAccent,
+                        valueIndicatorTextStyle: TextStyle(
+                          fontFamily: 'Raleway',
+                          color: themeProvider.isDarkMode
+                              ? Colors.black38
+                              : Colors.white70,
+                        ),
+                      ),
+                      child: Slider(
+                        value: _length,
+                        min: 60,
+                        max: 310,
+                        label: '$_length',
+                        divisions: 500,
+                        onChanged: (value) {
+                          setState(
+                            () {
+                              _length = value;
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                height: height * 0.48,
+                width: width * 0.41,
+                child: Card(
+                  elevation: 0,
+                  child: CupertinoButton(
+                    color: Color.fromARGB(255, 73, 232, 108),
+                    onPressed: () {},
+                    child: Text(
+                      'Calculate',
+                      style:
+                          TextStyle(fontFamily: 'IBM Plex Sans', fontSize: 40),
+                    ),
+                  ),
+                ),
               ),
             ],
           ),
