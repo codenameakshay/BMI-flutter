@@ -177,6 +177,7 @@ class _MainScreenPState extends State<MainScreenP> {
     return Column(
       children: <Widget>[
         Card(
+          elevation: 10,
           margin: EdgeInsets.symmetric(
             vertical: height * 0.03,
             horizontal: width * 0.05,
@@ -212,6 +213,119 @@ class _MainScreenPState extends State<MainScreenP> {
               ),
             ],
           ),
+        ),
+        Row(mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              width: width*0.495,
+              height: height*0.25,
+              child: Card(
+                margin: EdgeInsets.symmetric(
+                  vertical: height * 0.02,
+                  horizontal: width * 0.05,
+                ),
+                elevation: 10,
+                child: Column(mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical:15,horizontal:15),
+                      child: Text('Weight'),
+                    ),
+                    Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        InkWell(
+                          child: GestureDetector(
+                            onTap: () {},
+                            child: Padding(
+                              padding: const EdgeInsets.all(15),
+                              child: ClipOval(
+                                child: Container(
+                                  color: Colors.blue,
+                                  height: width * 0.1, // height of the button
+                                  width: width * 0.1, // width of the button
+                                  child: Center(child: Text('-')),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        InkWell(
+                          child: GestureDetector(
+                            onTap: () {},
+                            child: Padding(
+                              padding: const EdgeInsets.all(15),
+                              child: ClipOval(
+                                child: Container(
+                                  color: Colors.blue,
+                                  height: width * 0.1, // height of the button
+                                  width: width * 0.1, // width of the button
+                                  child: Center(child: Text('+')),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ),
+            Container(width: width*0.495,
+              height: height*0.25,
+              child: Card(
+                margin: EdgeInsets.symmetric(
+                  vertical: height * 0.02,
+                  horizontal: width * 0.05,
+                ),
+                elevation: 10,
+                child: Column(mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical:15,horizontal:15),
+                      child: Text('Age'),
+                    ),
+                    Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        InkWell(
+                          child: GestureDetector(
+                            onTap: () {},
+                            child: Padding(
+                              padding: const EdgeInsets.all(15),
+                              child: ClipOval(
+                                child: Container(
+                                  color: Colors.blue,
+                                  height: width * 0.1, // height of the button
+                                  width: width * 0.1, // width of the button
+                                  child: Center(child: Text('-')),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        InkWell(
+                          child: GestureDetector(
+                            onTap: () {},
+                            child: Padding(
+                              padding: const EdgeInsets.all(15),
+                              child: ClipOval(
+                                child: Container(
+                                  color: Colors.blue,
+                                  height: width * 0.1, // height of the button
+                                  width: width * 0.1, // width of the button
+                                  child: Center(child: Text('+')),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ],
     );
