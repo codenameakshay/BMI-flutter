@@ -161,6 +161,7 @@ class _MainScreenPState extends State<MainScreenP> {
   var weight;
   var age;
   var _length;
+  var bmi;
 
   @override
   void initState() {
@@ -169,6 +170,7 @@ class _MainScreenPState extends State<MainScreenP> {
     weight = 45;
     age = 20;
     _length = 185.0;
+    bmi = 0.0;
   }
 
   void changeGenderValue(int val) {
@@ -188,8 +190,12 @@ class _MainScreenPState extends State<MainScreenP> {
 
   void decreaseWeight() {
     setState(() {
-      weight--;
-      print(weight);
+      if (weight > 0) {
+        weight--;
+        print(weight);
+      } else {
+        weight = 0;
+      }
     });
   }
 
@@ -202,9 +208,17 @@ class _MainScreenPState extends State<MainScreenP> {
 
   void decreaseAge() {
     setState(() {
-      age--;
-      print(age);
+      if (age > 0) {
+        age--;
+        print(age);
+      } else {
+        age = 0;
+      }
     });
+  }
+
+  void calculateBMI() {
+    bmi = weight / (_length * _length);
   }
 
   _MainScreenPState(this.height, this.width);
@@ -238,7 +252,7 @@ class _MainScreenPState extends State<MainScreenP> {
                     Text('Male',
                         style: TextStyle(
                           fontFamily: 'Raleway',
-                          fontSize: 20,
+                          fontSize: 30,
                         )),
                   ],
                 ),
@@ -256,7 +270,7 @@ class _MainScreenPState extends State<MainScreenP> {
                       'Female',
                       style: TextStyle(
                         fontFamily: 'Raleway',
-                        fontSize: 20,
+                        fontSize: 30,
                       ),
                     ),
                   ],
@@ -298,7 +312,7 @@ class _MainScreenPState extends State<MainScreenP> {
                         '$weight Kg',
                         style: TextStyle(
                           fontFamily: 'IBM Plex Sans',
-                          fontSize: 20,
+                          fontSize: 30,
                         ),
                       ),
                     ),
@@ -386,10 +400,10 @@ class _MainScreenPState extends State<MainScreenP> {
                       padding: const EdgeInsets.symmetric(
                           vertical: 15, horizontal: 15),
                       child: Text(
-                        '$age years',
+                        '$age ' + ((age > 1) ? 'years' : 'year'),
                         style: TextStyle(
                           fontFamily: 'IBM Plex Sans',
-                          fontSize: 20,
+                          fontSize: 30,
                         ),
                       ),
                     ),
@@ -483,7 +497,7 @@ class _MainScreenPState extends State<MainScreenP> {
                         ' $_length cm',
                         style: TextStyle(
                           fontFamily: 'IBM Plex Sans',
-                          fontSize: 20,
+                          fontSize: 30,
                         ),
                       ),
                     ],
@@ -606,8 +620,12 @@ class _MainScreenLState extends State<MainScreenL> {
 
   void decreaseWeight() {
     setState(() {
-      weight--;
-      print(weight);
+      if (weight > 0) {
+        weight--;
+        print(weight);
+      } else {
+        weight = 0;
+      }
     });
   }
 
@@ -620,8 +638,12 @@ class _MainScreenLState extends State<MainScreenL> {
 
   void decreaseAge() {
     setState(() {
-      age--;
-      print(age);
+      if (age > 0) {
+        age--;
+        print(age);
+      } else {
+        age = 0;
+      }
     });
   }
 
@@ -659,7 +681,7 @@ class _MainScreenLState extends State<MainScreenL> {
                           'Male',
                           style: TextStyle(
                             fontFamily: 'Raleway',
-                            fontSize: 20,
+                            fontSize: 30,
                           ),
                         ),
                       ],
@@ -678,7 +700,7 @@ class _MainScreenLState extends State<MainScreenL> {
                           'Female',
                           style: TextStyle(
                             fontFamily: 'Raleway',
-                            fontSize: 20,
+                            fontSize: 30,
                           ),
                         ),
                       ],
@@ -719,7 +741,7 @@ class _MainScreenLState extends State<MainScreenL> {
                               '$weight Kg',
                               style: TextStyle(
                                 fontFamily: 'IBM Plex Sans',
-                                fontSize: 20,
+                                fontSize: 30,
                               ),
                             ),
                           ),
@@ -811,10 +833,10 @@ class _MainScreenLState extends State<MainScreenL> {
                             padding: const EdgeInsets.symmetric(
                                 vertical: 15, horizontal: 15),
                             child: Text(
-                              '$age years',
+                              '$age ' + ((age > 1) ? 'years' : 'year'),
                               style: TextStyle(
                                 fontFamily: 'IBM Plex Sans',
-                                fontSize: 20,
+                                fontSize: 30,
                               ),
                             ),
                           ),
@@ -917,7 +939,7 @@ class _MainScreenLState extends State<MainScreenL> {
                             ' $_length cm',
                             style: TextStyle(
                               fontFamily: 'IBM Plex Sans',
-                              fontSize: 20,
+                              fontSize: 30,
                             ),
                           ),
                         ],
@@ -980,7 +1002,7 @@ class _MainScreenLState extends State<MainScreenL> {
                 ),
               ),
               Container(
-                height: height * 0.48,
+                height: height * 0.43,
                 width: width * 0.41,
                 child: Card(
                   elevation: 0,
