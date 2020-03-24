@@ -14,4 +14,4 @@ A Flutter based BMI calculator that supports auto rotation, dark mode and materi
 
 # Download
 
-Download it from the build\app\outputs\apk\release\app-release.apk directory.
+Download app-release.apk from the root directory.
