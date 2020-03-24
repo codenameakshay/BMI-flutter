@@ -134,14 +134,16 @@ class _HomePageState extends State<HomePage> {
 
 class HomePage2 extends StatefulWidget {
   bool isCalculated;
-  HomePage2(this.isCalculated);
+  var bmi;
+  HomePage2(this.isCalculated, this.bmi);
   @override
-  _HomePage2State createState() => _HomePage2State(isCalculated);
+  _HomePage2State createState() => _HomePage2State(isCalculated, bmi);
 }
 
 class _HomePage2State extends State<HomePage2> {
   bool isCalculated;
-  _HomePage2State(this.isCalculated);
+  var bmi;
+  _HomePage2State(this.isCalculated, this.bmi);
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<DynamicTheme>(context);
@@ -223,7 +225,7 @@ class _HomePage2State extends State<HomePage2> {
       appBar: AppBar(
         title: Text("BMI Calculator"),
       ),
-      body: ResultScreen(isCalculated),
+      body: ResultScreen(isCalculated, bmi),
       // isBinary ? BinaryClock() : DigitalClock(),
     );
   }
@@ -258,14 +260,17 @@ class _MainScreenState extends State<MainScreen> {
 
 class ResultScreen extends StatefulWidget {
   var isCalculated;
-  ResultScreen(this.isCalculated);
+  var bmi;
+  ResultScreen(this.isCalculated, this.bmi);
   @override
-  _ResultScreenState createState() => _ResultScreenState(this.isCalculated);
+  _ResultScreenState createState() =>
+      _ResultScreenState(this.isCalculated, this.bmi);
 }
 
 class _ResultScreenState extends State<ResultScreen> {
   var isCalculated;
-  _ResultScreenState(this.isCalculated);
+  var bmi;
+  _ResultScreenState(this.isCalculated, this.bmi);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -273,10 +278,10 @@ class _ResultScreenState extends State<ResultScreen> {
       child: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           return constraints.maxHeight > constraints.maxWidth
-              ? ResultScreenP(
-                  constraints.maxHeight, constraints.maxWidth, isCalculated)
-              : ResultScreenL(
-                  constraints.maxHeight, constraints.maxWidth, isCalculated);
+              ? ResultScreenP(constraints.maxHeight, constraints.maxWidth,
+                  isCalculated, bmi)
+              : ResultScreenL(constraints.maxHeight, constraints.maxWidth,
+                  isCalculated, bmi);
         },
       ),
     );
@@ -359,6 +364,7 @@ class _MainScreenPState extends State<MainScreenP> {
 
   void calculateBMI() {
     bmi = weight / (_length * _length / 10000);
+    bmi = double.parse((bmi).toStringAsFixed(2));
   }
 
   _MainScreenPState(this.height, this.width, isCalculated);
@@ -711,9 +717,10 @@ class _MainScreenPState extends State<MainScreenP> {
                     isCalculated = true;
                   },
                 );
+                calculateBMI();
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                      builder: (context) => HomePage2(isCalculated)),
+                      builder: (context) => HomePage2(isCalculated, bmi)),
                 );
               },
               child: Text(
@@ -745,6 +752,7 @@ class _MainScreenLState extends State<MainScreenL> {
   var weight;
   var age;
   var _length;
+  var bmi;
   var isCalculated;
 
   @override
@@ -798,6 +806,11 @@ class _MainScreenLState extends State<MainScreenL> {
         age = 0;
       }
     });
+  }
+
+  void calculateBMI() {
+    bmi = weight / (_length * _length / 10000);
+    bmi = double.parse((bmi).toStringAsFixed(2));
   }
 
   _MainScreenLState(this.height, this.width, this.isCalculated);
@@ -1167,9 +1180,10 @@ class _MainScreenLState extends State<MainScreenL> {
                           isCalculated = true;
                         },
                       );
+                      calculateBMI();
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                            builder: (context) => HomePage2(isCalculated)),
+                            builder: (context) => HomePage2(isCalculated, bmi)),
                       );
                     },
                     child: Text(
@@ -1192,33 +1206,148 @@ class ResultScreenP extends StatefulWidget {
   var height;
   var width;
   var isCalculated;
-  ResultScreenP(this.height, this.width, this.isCalculated);
+  var bmi;
+  ResultScreenP(this.height, this.width, this.isCalculated, this.bmi);
   @override
   _ResultScreenPState createState() =>
-      _ResultScreenPState(this.height, this.width, this.isCalculated);
+      _ResultScreenPState(this.height, this.width, this.isCalculated, this.bmi);
 }
 
 class _ResultScreenPState extends State<ResultScreenP> {
   var height;
   var width;
   var isCalculated;
-  _ResultScreenPState(this.height, this.width, this.isCalculated);
+  var bmi;
+  _ResultScreenPState(this.height, this.width, this.isCalculated, this.bmi);
   @override
   Widget build(BuildContext context) {
 // final themeProvider = Provider.of<DynamicTheme>(context);
-    return Container(
-      width: width * 0.9,
-      height: height * 0.5,
-      child: Column(
-        children: <Widget>[
-          Card(),
-          CupertinoButton(
+    return Column(
+      children: <Widget>[
+        Container(
+          margin: EdgeInsets.symmetric(vertical: height * 0.264),
+          width: width * 0.98,
+          height: height * 0.3,
+          child: Card(
+            elevation: 10,
+            margin: EdgeInsets.symmetric(
+              vertical: height * 0.03,
+              horizontal: width * 0.05,
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
+                  child: Text(
+                    'BMI',
+                    style: TextStyle(
+                      fontFamily: 'Raleway',
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                  child: Text(
+                    '$bmi',
+                    style: TextStyle(
+                      fontFamily: 'IBM Plex Sans',
+                      fontSize: 30,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                  child: bmi < 16
+                      ? Text(
+                          'You are severely thin.',
+                          style: TextStyle(
+                            fontFamily: 'IBM Plex Sans',
+                            fontSize: 20,
+                            color: Colors.red[700],
+                          ),
+                        )
+                      : bmi < 17
+                          ? Text(
+                              'You are moderately thin.',
+                              style: TextStyle(
+                                fontFamily: 'IBM Plex Sans',
+                                fontSize: 20,
+                                color: Colors.red,
+                              ),
+                            )
+                          : bmi < 18.5
+                              ? Text(
+                                  'You are mildly thin.',
+                                  style: TextStyle(
+                                    fontFamily: 'IBM Plex Sans',
+                                    fontSize: 20,
+                                    color: Colors.redAccent,
+                                  ),
+                                )
+                              : bmi < 25
+                                  ? Text(
+                                      'You are normal.',
+                                      style: TextStyle(
+                                        fontFamily: 'IBM Plex Sans',
+                                        fontSize: 20,
+                                        color: Colors.green,
+                                      ),
+                                    )
+                                  : bmi < 30
+                                      ? Text(
+                                          'You are overweight.',
+                                          style: TextStyle(
+                                            fontFamily: 'IBM Plex Sans',
+                                            fontSize: 20,
+                                            color: Colors.yellow,
+                                          ),
+                                        )
+                                      : bmi < 35
+                                          ? Text(
+                                              'You are mildly obese.',
+                                              style: TextStyle(
+                                                fontFamily: 'IBM Plex Sans',
+                                                fontSize: 20,
+                                                color: Colors.redAccent,
+                                              ),
+                                            )
+                                          : bmi < 40
+                                              ? Text(
+                                                  'You are moderately obese.',
+                                                  style: TextStyle(
+                                                    fontFamily: 'IBM Plex Sans',
+                                                    fontSize: 20,
+                                                    color: Colors.red,
+                                                  ),
+                                                )
+                                              : Text(
+                                                  'You are severely obese.',
+                                                  style: TextStyle(
+                                                    fontFamily: 'IBM Plex Sans',
+                                                    fontSize: 20,
+                                                    color: Colors.red[700],
+                                                  ),
+                                                ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Container(
+          width: width * 0.86,
+          height: height * 0.14,
+          child: CupertinoButton(
+              color: Colors.redAccent,
               child: Text('Back'),
               onPressed: () {
                 Navigator.pop(context);
-              })
-        ],
-      ),
+              }),
+        )
+      ],
     );
   }
 }
@@ -1227,17 +1356,19 @@ class ResultScreenL extends StatefulWidget {
   var height;
   var width;
   var isCalculated;
-  ResultScreenL(this.height, this.width, this.isCalculated);
+  var bmi;
+  ResultScreenL(this.height, this.width, this.isCalculated, this.bmi);
   @override
   _ResultScreenLState createState() =>
-      _ResultScreenLState(this.height, this.width, this.isCalculated);
+      _ResultScreenLState(this.height, this.width, this.isCalculated, this.bmi);
 }
 
 class _ResultScreenLState extends State<ResultScreenL> {
   var height;
   var width;
   var isCalculated;
-  _ResultScreenLState(this.height, this.width, this.isCalculated);
+  var bmi;
+  _ResultScreenLState(this.height, this.width, this.isCalculated, this.bmi);
   @override
   Widget build(BuildContext context) {
     // final themeProvider = Provider.of<DynamicTheme>(context);
