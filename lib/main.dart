@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
     final themeProvider = Provider.of<DynamicTheme>(context);
     return Scaffold(
       drawer: Drawer(
-        elevation: 10,
+        elevation: 0,
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
@@ -102,19 +102,6 @@ class _HomePageState extends State<HomePage> {
                     Navigator.pop(context);
                   },
                 ),
-              ),
-            ),
-            Divider(
-              height: 2.0,
-            ),
-            Builder(
-              builder: (context) => ListTile(
-                title: Text('Nothing here'),
-                leading: Icon(Icons.access_time),
-                onTap: () {
-                  // changeIsBinary();
-                  Navigator.pop(context);
-                },
               ),
             ),
             Divider(
@@ -149,7 +136,7 @@ class _HomePage2State extends State<HomePage2> {
     final themeProvider = Provider.of<DynamicTheme>(context);
     return Scaffold(
       drawer: Drawer(
-        elevation: 10,
+        elevation: 0,
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
@@ -201,19 +188,6 @@ class _HomePage2State extends State<HomePage2> {
                     Navigator.pop(context);
                   },
                 ),
-              ),
-            ),
-            Divider(
-              height: 2.0,
-            ),
-            Builder(
-              builder: (context) => ListTile(
-                title: Text('Nothing here'),
-                leading: Icon(Icons.access_time),
-                onTap: () {
-                  // changeIsBinary();
-                  Navigator.pop(context);
-                },
               ),
             ),
             Divider(
@@ -377,7 +351,14 @@ class _MainScreenPState extends State<MainScreenP> {
           width: width * 0.98,
           height: height * 0.17,
           child: Card(
-            elevation: 10,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+                side: BorderSide(
+                    width: 2,
+                    color: themeProvider.isDarkMode
+                        ? Colors.black38
+                        : Colors.grey[200])),
+            elevation: 0,
             margin: EdgeInsets.symmetric(
               vertical: height * 0.03,
               horizontal: width * 0.05,
@@ -391,6 +372,7 @@ class _MainScreenPState extends State<MainScreenP> {
                       value: 1,
                       groupValue: genderValue,
                       onChanged: (value) {
+                        HapticFeedback.vibrate();
                         changeGenderValue(value);
                         print('Male');
                       },
@@ -408,6 +390,7 @@ class _MainScreenPState extends State<MainScreenP> {
                       value: 2,
                       groupValue: genderValue,
                       onChanged: (value) {
+                        HapticFeedback.vibrate();
                         changeGenderValue(value);
                         print('Female');
                       },
@@ -432,11 +415,18 @@ class _MainScreenPState extends State<MainScreenP> {
               width: width * 0.495,
               height: height * 0.35,
               child: Card(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    side: BorderSide(
+                        width: 2,
+                        color: themeProvider.isDarkMode
+                            ? Colors.black38
+                            : Colors.grey[200])),
+                elevation: 0,
                 margin: EdgeInsets.symmetric(
                   vertical: height * 0.02,
                   horizontal: width * 0.05,
                 ),
-                elevation: 10,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -523,11 +513,18 @@ class _MainScreenPState extends State<MainScreenP> {
               width: width * 0.495,
               height: height * 0.35,
               child: Card(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    side: BorderSide(
+                        width: 2,
+                        color: themeProvider.isDarkMode
+                            ? Colors.black38
+                            : Colors.grey[200])),
+                elevation: 0,
                 margin: EdgeInsets.symmetric(
                   vertical: height * 0.02,
                   horizontal: width * 0.05,
                 ),
-                elevation: 10,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -618,7 +615,14 @@ class _MainScreenPState extends State<MainScreenP> {
           width: width * 0.98,
           height: height * 0.3,
           child: Card(
-            elevation: 10,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+                side: BorderSide(
+                    width: 2,
+                    color: themeProvider.isDarkMode
+                        ? Colors.black38
+                        : Colors.grey[200])),
+            elevation: 0,
             margin: EdgeInsets.symmetric(
               vertical: height * 0.03,
               horizontal: width * 0.05,
@@ -692,6 +696,7 @@ class _MainScreenPState extends State<MainScreenP> {
                     label: '$_length',
                     divisions: 500,
                     onChanged: (value) {
+                      HapticFeedback.vibrate();
                       setState(
                         () {
                           _length = value;
@@ -718,6 +723,7 @@ class _MainScreenPState extends State<MainScreenP> {
                   },
                 );
                 calculateBMI();
+                HapticFeedback.vibrate();
                 Navigator.of(context).push(
                   MaterialPageRoute(
                       builder: (context) => HomePage2(isCalculated, bmi)),
@@ -825,7 +831,14 @@ class _MainScreenLState extends State<MainScreenL> {
           child: Column(
             children: <Widget>[
               Card(
-                elevation: 10,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    side: BorderSide(
+                        width: 2,
+                        color: themeProvider.isDarkMode
+                            ? Colors.black38
+                            : Colors.grey[200])),
+                elevation: 0,
                 margin: EdgeInsets.symmetric(
                   vertical: height * 0.04,
                   horizontal: width * 0.02,
@@ -839,6 +852,7 @@ class _MainScreenLState extends State<MainScreenL> {
                           value: 1,
                           groupValue: genderValue,
                           onChanged: (value) {
+                            HapticFeedback.vibrate();
                             changeGenderValue(value);
                             print('Male');
                           },
@@ -858,6 +872,7 @@ class _MainScreenLState extends State<MainScreenL> {
                           value: 2,
                           groupValue: genderValue,
                           onChanged: (value) {
+                            HapticFeedback.vibrate();
                             changeGenderValue(value);
                             print('Female');
                           },
@@ -881,11 +896,18 @@ class _MainScreenLState extends State<MainScreenL> {
                     width: width * 0.25,
                     height: height * 0.68,
                     child: Card(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          side: BorderSide(
+                              width: 2,
+                              color: themeProvider.isDarkMode
+                                  ? Colors.black38
+                                  : Colors.grey[200])),
+                      elevation: 0,
                       margin: EdgeInsets.symmetric(
                         vertical: height * 0.005,
                         horizontal: width * 0.02,
                       ),
-                      elevation: 10,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
@@ -928,9 +950,9 @@ class _MainScreenLState extends State<MainScreenL> {
                                             ? Colors.tealAccent[400]
                                             : Colors.blue,
                                         height: height *
-                                            0.1, // height of the button
-                                        width:
-                                            height * 0.1, // width of the button
+                                            0.15, // height of the button
+                                        width: height *
+                                            0.15, // width of the button
                                         child: Center(
                                             child: Icon(Icons.remove,
                                                 size: height * 0.08)),
@@ -953,9 +975,9 @@ class _MainScreenLState extends State<MainScreenL> {
                                             ? Colors.tealAccent[400]
                                             : Colors.blue,
                                         height: height *
-                                            0.1, // height of the button
-                                        width:
-                                            height * 0.1, // width of the button
+                                            0.15, // height of the button
+                                        width: height *
+                                            0.15, // width of the button
                                         child: Center(
                                             child: Icon(
                                           Icons.add,
@@ -976,11 +998,18 @@ class _MainScreenLState extends State<MainScreenL> {
                     width: width * 0.25,
                     height: height * 0.68,
                     child: Card(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          side: BorderSide(
+                              width: 2,
+                              color: themeProvider.isDarkMode
+                                  ? Colors.black38
+                                  : Colors.grey[200])),
+                      elevation: 0,
                       margin: EdgeInsets.symmetric(
                         vertical: height * 0.005,
                         horizontal: width * 0.02,
                       ),
-                      elevation: 10,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
@@ -1023,9 +1052,9 @@ class _MainScreenLState extends State<MainScreenL> {
                                             ? Colors.tealAccent[400]
                                             : Colors.blue,
                                         height: height *
-                                            0.1, // height of the button
-                                        width:
-                                            height * 0.1, // width of the button
+                                            0.15, // height of the button
+                                        width: height *
+                                            0.15, // width of the button
                                         child: Center(
                                             child: Icon(
                                           Icons.remove,
@@ -1050,9 +1079,9 @@ class _MainScreenLState extends State<MainScreenL> {
                                             ? Colors.tealAccent[400]
                                             : Colors.blue,
                                         height: height *
-                                            0.1, // height of the button
-                                        width:
-                                            height * 0.1, // width of the button
+                                            0.15, // height of the button
+                                        width: height *
+                                            0.15, // width of the button
                                         child: Center(
                                             child: Icon(
                                           Icons.add,
@@ -1080,7 +1109,14 @@ class _MainScreenLState extends State<MainScreenL> {
           child: Column(
             children: <Widget>[
               Card(
-                elevation: 10,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    side: BorderSide(
+                        width: 2,
+                        color: themeProvider.isDarkMode
+                            ? Colors.black38
+                            : Colors.grey[200])),
+                elevation: 0,
                 margin: EdgeInsets.symmetric(
                   vertical: height * 0.03,
                   horizontal: width * 0.05,
@@ -1156,6 +1192,7 @@ class _MainScreenLState extends State<MainScreenL> {
                         label: '$_length',
                         divisions: 500,
                         onChanged: (value) {
+                          HapticFeedback.vibrate();
                           setState(
                             () {
                               _length = value;
@@ -1181,6 +1218,7 @@ class _MainScreenLState extends State<MainScreenL> {
                         },
                       );
                       calculateBMI();
+                      HapticFeedback.vibrate();
                       Navigator.of(context).push(
                         MaterialPageRoute(
                             builder: (context) => HomePage2(isCalculated, bmi)),
@@ -1221,7 +1259,7 @@ class _ResultScreenPState extends State<ResultScreenP> {
   _ResultScreenPState(this.height, this.width, this.isCalculated, this.bmi);
   @override
   Widget build(BuildContext context) {
-// final themeProvider = Provider.of<DynamicTheme>(context);
+    final themeProvider = Provider.of<DynamicTheme>(context);
     return Column(
       children: <Widget>[
         Container(
@@ -1229,7 +1267,14 @@ class _ResultScreenPState extends State<ResultScreenP> {
           width: width * 0.98,
           height: height * 0.3,
           child: Card(
-            elevation: 10,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+                side: BorderSide(
+                    width: 2,
+                    color: themeProvider.isDarkMode
+                        ? Colors.black38
+                        : Colors.grey[200])),
+            elevation: 0,
             margin: EdgeInsets.symmetric(
               vertical: height * 0.03,
               horizontal: width * 0.05,
@@ -1342,7 +1387,10 @@ class _ResultScreenPState extends State<ResultScreenP> {
           height: height * 0.14,
           child: CupertinoButton(
               color: Colors.redAccent,
-              child: Text('Back'),
+              child: Text(
+                'Back',
+                style: TextStyle(fontFamily: 'IBM Plex Sans', fontSize: 40),
+              ),
               onPressed: () {
                 Navigator.pop(context);
               }),
@@ -1371,7 +1419,143 @@ class _ResultScreenLState extends State<ResultScreenL> {
   _ResultScreenLState(this.height, this.width, this.isCalculated, this.bmi);
   @override
   Widget build(BuildContext context) {
-    // final themeProvider = Provider.of<DynamicTheme>(context);
-    return Row();
+    final themeProvider = Provider.of<DynamicTheme>(context);
+    return Row(
+      children: <Widget>[
+        Container(
+          margin: EdgeInsets.symmetric(vertical: height * 0.08),
+          width: width * 0.6,
+          height: height * 0.9,
+          child: Card(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+                side: BorderSide(
+                    width: 2,
+                    color: themeProvider.isDarkMode
+                        ? Colors.black38
+                        : Colors.grey[200])),
+            elevation: 0,
+            margin: EdgeInsets.symmetric(
+              vertical: height * 0.03,
+              horizontal: width * 0.05,
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
+                  child: Text(
+                    'BMI',
+                    style: TextStyle(
+                      fontFamily: 'Raleway',
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                  child: Text(
+                    '$bmi',
+                    style: TextStyle(
+                      fontFamily: 'IBM Plex Sans',
+                      fontSize: 30,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                  child: bmi < 16
+                      ? Text(
+                          'You are severely thin.',
+                          style: TextStyle(
+                            fontFamily: 'IBM Plex Sans',
+                            fontSize: 20,
+                            color: Colors.red[700],
+                          ),
+                        )
+                      : bmi < 17
+                          ? Text(
+                              'You are moderately thin.',
+                              style: TextStyle(
+                                fontFamily: 'IBM Plex Sans',
+                                fontSize: 20,
+                                color: Colors.red,
+                              ),
+                            )
+                          : bmi < 18.5
+                              ? Text(
+                                  'You are mildly thin.',
+                                  style: TextStyle(
+                                    fontFamily: 'IBM Plex Sans',
+                                    fontSize: 20,
+                                    color: Colors.redAccent,
+                                  ),
+                                )
+                              : bmi < 25
+                                  ? Text(
+                                      'You are normal.',
+                                      style: TextStyle(
+                                        fontFamily: 'IBM Plex Sans',
+                                        fontSize: 20,
+                                        color: Colors.green,
+                                      ),
+                                    )
+                                  : bmi < 30
+                                      ? Text(
+                                          'You are overweight.',
+                                          style: TextStyle(
+                                            fontFamily: 'IBM Plex Sans',
+                                            fontSize: 20,
+                                            color: Colors.yellow,
+                                          ),
+                                        )
+                                      : bmi < 35
+                                          ? Text(
+                                              'You are mildly obese.',
+                                              style: TextStyle(
+                                                fontFamily: 'IBM Plex Sans',
+                                                fontSize: 20,
+                                                color: Colors.redAccent,
+                                              ),
+                                            )
+                                          : bmi < 40
+                                              ? Text(
+                                                  'You are moderately obese.',
+                                                  style: TextStyle(
+                                                    fontFamily: 'IBM Plex Sans',
+                                                    fontSize: 20,
+                                                    color: Colors.red,
+                                                  ),
+                                                )
+                                              : Text(
+                                                  'You are severely obese.',
+                                                  style: TextStyle(
+                                                    fontFamily: 'IBM Plex Sans',
+                                                    fontSize: 20,
+                                                    color: Colors.red[700],
+                                                  ),
+                                                ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Container(
+          width: width * 0.35,
+          height: height * 0.8,
+          child: CupertinoButton(
+              color: Colors.redAccent,
+              child: Text(
+                'Back',
+                style: TextStyle(fontFamily: 'IBM Plex Sans', fontSize: 40),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              }),
+        )
+      ],
+    );
   }
 }
